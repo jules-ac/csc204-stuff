@@ -1,0 +1,40 @@
+org 100h
+
+    jmp main            ; skip over the data on the way in
+
+; -----------------------------------------------------------
+; Data
+; -----------------------------------------------------------
+val    dd 41h           ; example initialized doubleword
+sum    dd 0
+num    dd 99h
+num2   dd 7h
+; -----------------------------------------------------------
+; Code
+; -----------------------------------------------------------
+main:
+    ; your code here
+    mov eax, 15h
+    mov ebx, 40h
+
+    mov edx, [eax]
+    mov eax, [ebx]
+    mov ebx, [edx]
+
+    XCHG dword [eax], [ebx]
+    XCHG dword [eax], [num]
+
+    mov [num], [num2]
+    mov eax, bx
+    
+    mov ax, 4C00h        ; DOS terminate-program function
+    int 21h              ; return code 0 in AL
+
+; Overflow
+;   SET: OV    CLEAR: NV
+; Sign
+;   SET: NG    CLEAR: PL
+; Zero
+;   SET: ZR    CLEAR: NZ
+; Carry
+;   SET: CY    CLEAR: NC
