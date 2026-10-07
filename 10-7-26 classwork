@@ -1,0 +1,25 @@
+section .data
+
+section .text
+global _start
+_start:
+
+mov al, 10110110b ; b6h
+and al, 11110000b ; clears bottom 4 bits of al: al = b0h
+
+mov al, 00100001b ; 21h
+or al, 00001000b ; adds 8h to al: al = 29h
+
+xor al, 00100000b ; toggles bit 5 off, subtracting 20h from al: al = 9h
+
+mov al, 5Bh
+xor bl, bl ; zeros bl
+test al, 1 ; implied 'and' operation, doesn't modify operands: true if num. is odd (1 in LSB), false if num. is even
+
+jz even ; jump to even label if result of test is zero (if result is even)
+mov bl, 1
+even:
+
+mov rax, 60
+xor rdi, rdi
+syscall
